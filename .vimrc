@@ -47,7 +47,6 @@ set clipboard=unnamed,autoselect
 " 行番号を表示
 set number
 :highlight LineNr ctermfg=grey
-""
 set backspace=indent,eol,start
 
 
@@ -80,6 +79,7 @@ call dein#begin('/Users/kato/.cache/dein')
 call dein#add('/Users/kato/.cache/dein/repos/github.com/Shougo/dein.vim')
 call dein#add('scrooloose/nerdtree')
 call dein#add("neoclide/coc.nvim")
+call dein#add("bkad/CamelCaseMotion")
 " call dein#add('Shougo/ddc.vim')
 " call dein#add('vim-denops/denops.vim')
 " call dein#add('Shougo/pum.vim')
@@ -110,34 +110,6 @@ call map(dein#check_clean(), "delete(v:val, 'rf')")
 "End dein Scripts-------------------------
 "
 
-"Start ddc Scripts-----------------------------
-" call ddc#custom#patch_global('completionMenu', 'pum.vim')
-" call ddc#custom#patch_global('sources', [
-"  \ 'around',
-"  \ 'vim-lsp',
-"  \ 'file'
-"  \ ])
-" call ddc#custom#patch_global('sourceOptions', {
-"  \ '_': {
-"  \   'matchers': ['matcher_head'],
-"  \   'sorters': ['sorter_rank'],
-"  \   'converters': ['converter_remove_overlap'],
-"  \ },
-"  \ 'around': {'mark': 'Around'},
-"  \ 'vim-lsp': {
-"  \   'mark': 'LSP', 
-"  \   'matchers': ['matcher_head'],
-"  \ },
-"  \ 'file': {
-"  \   'mark': 'file',
-"  \   'isVolatile': v:true, 
-"  \   'forceCompletionPattern': '\S/\S*'
-"  \ }})
-" call ddc#enable()
-" inoremap <Tab> <Cmd>call pum#map#insert_relative(+1)<CR>
-" inoremap <S-Tab> <Cmd>call pum#map#insert_relative(-1)<CR>
-
-"End ddc Scripts-------------------------
 
 
 nnoremap <leader>n :NERDTreeFocus<CR>
@@ -288,3 +260,22 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+
+" CamelCaseMotion---------------------------------------
+map <silent> w <Plug>CamelCaseMotion_w
+map <silent> b <Plug>CamelCaseMotion_b
+map <silent> e <Plug>CamelCaseMotion_e
+map <silent> ge <Plug>CamelCaseMotion_ge
+sunmap w
+sunmap b
+sunmap e
+sunmap ge
+map <silent> w <Plug>CamelCaseMotion_w
+map <silent> b <Plug>CamelCaseMotion_b
+map <silent> e <Plug>CamelCaseMotion_e
+map <silent> ge <Plug>CamelCaseMotion_ge
+sunmap w
+sunmap b
+sunmap e
+sunmap ge
