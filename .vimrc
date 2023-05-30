@@ -69,30 +69,18 @@ if &compatible
 endif
 
 " Required:
-set runtimepath+=/Users/kato/.cache/dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-call dein#begin('/Users/kato/.cache/dein')
+call dein#begin($HOME . '/.cache/dein')
 
 " Let dein manage dein
 " Required:
-call dein#add('/Users/kato/.cache/dein/repos/github.com/Shougo/dein.vim')
+call dein#add($HOME . '/.cache/dein/repos/github.com/Shougo/dein.vim')
+
 call dein#add('scrooloose/nerdtree')
 call dein#add("neoclide/coc.nvim")
 call dein#add("bkad/CamelCaseMotion")
-" call dein#add('Shougo/ddc.vim')
-" call dein#add('vim-denops/denops.vim')
-" call dein#add('Shougo/pum.vim')
-" call dein#add('Shougo/ddc-around')
-" call dein#add('LumaKernel/ddc-file')
-" call dein#add('Shougo/ddc-matcher_head')
-" call dein#add('Shougo/ddc-sorter_rank')
-" call dein#add('Shougo/ddc-converter_remove_overlap')
-" call dein#add('prabirshrestha/vim-lsp')
-" call dein#add('mattn/vim-lsp-settings')
-" Add or remove your plugins here like this:
-"call dein#add('Shougo/neosnippet.vim')
-"call dein#add('Shougo/neosnippet-snippets')
 
 " Required:
 call dein#end()
@@ -113,9 +101,8 @@ call map(dein#check_clean(), "delete(v:val, 'rf')")
 
 
 nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
+nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <C-t> :NERDTreeFind<CR>
 if has('vim_starting')
     " 挿入モード時に非点滅の縦棒タイプのカーソル
     let &t_SI .= "\e[6 q"
@@ -279,3 +266,19 @@ sunmap w
 sunmap b
 sunmap e
 sunmap ge
+
+
+" =============================================
+" php-cs-formatterによる自動整形
+" =============================================
+function! s:format_php() abort
+  :r! php-cs-fixer -q fix % --config=$HOME/.php_cs
+  :e! " 再読み込み
+endfunction
+augroup phpsetting
+    autocmd!
+    autocmd BufWritePost *.php :call s:format_php()
+augroup END
+
+
+let NERDTreeShowHidden=1
